@@ -5,9 +5,10 @@ import (
 	"flag"
 	"fmt"
 	"io/ioutil"
-	"meow"
 	"os"
 	"time"
+
+	"github.com/quillaja/meow"
 )
 
 // Similar to the meow_example program from the upstream repo,
