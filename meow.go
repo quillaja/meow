@@ -4,9 +4,13 @@
 // Molly Rocket, Inc. It implements a non-cryptographic hash.
 // See header comment in cgo section of meow.go for more details,
 // or the repo at https://github.com/cmuratori/meow_hash.
+//
+// One will primarily want to use the Hash() function. This package
+// also provides compatibility with the hash.Hash interface using New().
 package meow
 
 // #cgo CFLAGS: -O3 -mavx -maes
+//
 // /* ========================================================================
 //
 //    Meow - A Fast Non-cryptographic Hash
@@ -452,6 +456,7 @@ package meow
 //     return(xmm0);
 // }
 //
+// // Streaming constructions removed
 //
 // #undef INSTRUCTION_REORDER_BARRIER
 // #undef prefetcht0
@@ -470,6 +475,7 @@ package meow
 // #undef MEOW_SHUFFLE
 // #undef MEOW_DUMP_STATE
 //
+// // MeowExpandSeed() removed
 //
 // #define MEOW_HASH_X64_AESNI_H
 // #endif
@@ -492,9 +498,10 @@ const (
 	VersionName = "0.5/calico"
 )
 
-// MeowDefaultSeed a seed to use.
-// NOTE(casey): The default seed is now a "nothing-up-our-sleeves"
-// number for good measure.  You may verify that it is just an encoding of Pi.
+// MeowDefaultSeed is a seed to use.
+//
+// The default seed is now a "nothing-up-our-sleeves" number for good measure.
+// You may verify that it is just an encoding of Pi.
 var MeowDefaultSeed = [SeedSize]byte{
 	0x32, 0x43, 0xF6, 0xA8, 0x88, 0x5A, 0x30, 0x8D,
 	0x31, 0x31, 0x98, 0xA2, 0xE0, 0x37, 0x07, 0x34,
